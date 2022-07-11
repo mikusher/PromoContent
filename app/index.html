@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Prometheus, Grafana and Superset Proof of Concept</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css" integrity="sha384-h21C2fcDk/eFsW9sC9h0dhokq5pDinLNklTKoxIZRUn3+hvmgQSffLLQ4G4l2eEr" crossorigin="anonymous">
+</head>
+<body class="page-quickStart">
+<div class="navbar navbar-default navbar-static-top">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">
+                        Proof of Concept: <b>Prometheus, Grafana and Superset</b>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row" id="imageContainer">
+
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script>
+    function shuffle(array) {
+        var currentIndex = array.length, temporaryValue, randomIndex;
+        while (0 !== currentIndex) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex -= 1;
+            temporaryValue = array[currentIndex];
+            array[currentIndex] = array[randomIndex];
+            array[randomIndex] = temporaryValue;
+        }
+        return array;
+    }
+
+    $(document).ready(function() {
+        shuffle([
+            "superset",
+            "redis-commander",
+            "alertmanager",
+            "prometheus",
+            "grafana",
+            "pgadmin",
+            "prometheus-push"
+        ]).forEach(function(element) {
+            switch (element) {
+                case 'superset':
+                    port = 8088
+                    username = 'admin'
+                    password = 'admin'
+                    break;
+                case 'prometheus-push':
+                    port = 9091
+                    username = '---'
+                    password = '---'
+                    break;
+                case 'alertmanager':
+                    port = 9093
+                    username = '---'
+                    password = '---'
+                    break;
+                case 'grafana':
+                    port = 3000
+                    username = 'admin'
+                    password = 'admin'
+                    break;
+                case 'pgadmin':
+                    port = 5050
+                    username = 'pgadmin4@pgadmin.org'
+                    password = 'admin1234'
+                    break;
+                case 'prometheus':
+                    port = 9090
+                    username = '---'
+                    password = '---'
+                    break;
+                case 'redis-commander':
+                    port = 8081
+                    username = 'root'
+                    password = 'qwerty'
+                    break;
+                default:
+                    port = 0
+                    username = '---'
+                    password = '---'
+            }
+            $('#imageContainer').append('<div class="col-xs-6 col-md-3"><a href="http://localhost:'+port+'" technology="' + element + '" class="thumbnail" target="_blank"><img src="images/' + element + '.png" width="50" height="50"></a><div class="col-sm"> <b>username: </b>'+username+'<br \><b>password: </b>'+password+' </div></div>');
+        });
+
+        $('a.thumbnail').click(function (e) {
+            var elementClicked = $(this).attr('technology');
+            console.log("Clicked on: " + elementClicked);
+
+            //e.preventDefault();
+        });
+    });
+</script>
+</body>
+</html>
