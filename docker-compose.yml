@@ -96,7 +96,7 @@ services:
       - pgadmin:/root/.pgadmin
 
   prometheus:
-    image: prom/prometheus:v2.17.1
+    image: prom/prometheus:latest #v2.17.1
     container_name: prometheus
     volumes:
       - ./prometheus-grafana/prometheus:/etc/prometheus
@@ -117,7 +117,7 @@ services:
       org.label-schema.group: "monitoring"
 
   alertmanager:
-    image: prom/alertmanager:v0.20.0
+    image: prom/alertmanager:latest #v0.20.0
     container_name: alertmanager
     volumes:
       - ./prometheus-grafana/alertmanager:/etc/alertmanager
@@ -133,7 +133,7 @@ services:
       org.label-schema.group: "monitoring"
 
   nodeexporter:
-    image: prom/node-exporter:v0.18.1
+    image: prom/node-exporter:latest #v0.18.1
     container_name: nodeexporter
     volumes:
       - /proc:/host/proc:ro
@@ -153,7 +153,7 @@ services:
       org.label-schema.group: "monitoring"
 
   cadvisor:
-    image: gcr.io/google-containers/cadvisor:v0.34.0
+    image: gcr.io/google-containers/cadvisor:latest #v0.34.0
     container_name: cadvisor
     volumes:
       - /:/rootfs:ro
@@ -170,7 +170,7 @@ services:
       org.label-schema.group: "monitoring"
 
   grafana:
-    image: grafana/grafana:6.7.2
+    image: grafana/grafana:latest #6.7.2
     container_name: grafana
     volumes:
       - grafana_data:/var/lib/grafana
@@ -185,7 +185,7 @@ services:
       org.label-schema.group: "monitoring"
 
   pushgateway:
-    image: prom/pushgateway:v1.2.0
+    image: prom/pushgateway:latest #v1.2.0
     container_name: pushgateway
     restart: unless-stopped
     expose:
@@ -196,7 +196,7 @@ services:
       org.label-schema.group: "monitoring"
 
   caddy:
-    image: stefanprodan/caddy
+    image: stefanprodan/caddy:latest
     container_name: caddy
     ports:
       - "3000:3000"
